@@ -19,8 +19,8 @@ public class OkHttpCreator{
                 Request original = chain.request();
 
                 Request request = original.newBuilder()
-                        .header("X-RapidAPI-Key", "8a50b37af0mshaac729cca51fe47p12c76ajsnbccbb1fe4915")
-                        .header("X-RapidAPI-Host", "omgvamp-hearthstone-v1.p.rapidapi.com")
+                        .header("", "")
+                        .header("", "")
                         .build();
                 return chain.proceed(request);
             }
