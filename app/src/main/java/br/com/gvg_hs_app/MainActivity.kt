@@ -13,13 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.gvg_hs_app.ui.theme.GvGHSAppTheme
 import br.com.gvg_hs_app.views.CardListScreen
+import br.com.gvg_hs_app.views.CardVMFactory
 import br.com.gvg_hs_app.views.CardsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val cardViewModel by viewModels<CardsViewModel>()
+        val cardsViewModel by viewModels<CardsViewModel>(){
+            CardVMFactory(
+                (this.applicationContext as GvgHsApplication).repository
+            )
+        }
 
         setContent {
             GvGHSAppTheme {
@@ -27,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GvGHeroes(cardViewModel)
+                    GvGHeroes(cardsViewModel)
                 }
             }
         }

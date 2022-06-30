@@ -1,8 +1,7 @@
-package br.com.gvg_hs_app.network
-import br.com.gvg_hs_app.data.Card
+package br.com.gvg_hs_app.data.source
+import br.com.gvg_hs_app.data.domain.Card
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -22,11 +21,11 @@ private val retrofit = Retrofit.Builder()
 
 interface HearthStoneApiService {
     @Headers(
-        "",
-        ""
+        "X-RapidAPI-Key: 8a50b37af0mshaac729cca51fe47p12c76ajsnbccbb1fe4915",
+        "X-RapidAPI-Host: omgvamp-hearthstone-v1.p.rapidapi.com"
     )
     @GET("cards/sets/Goblins%20vs%20Gnomes?collectible=1")
-    suspend fun getGvGCards(): List<Card>
+    suspend fun getGvGCards(): List<SourceCard>
 }
 
 

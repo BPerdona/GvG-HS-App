@@ -1,4 +1,4 @@
-package br.com.gvg_hs_app.data
+package br.com.gvg_hs_app.data.domain
 
 data class Card(
     val cardId: String,
