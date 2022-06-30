@@ -3,7 +3,6 @@ package br.com.gvg_hs_app.views
 import android.util.Log
 import androidx.lifecycle.*
 import br.com.gvg_hs_app.data.domain.Card
-import br.com.gvg_hs_app.data.source.HearthStoneApi
 import br.com.gvg_hs_app.data.repository.CardRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -17,7 +16,7 @@ class CardsViewModel(private val repository: CardRepository): ViewModel() {
         }
     }
 
-    private val _cardList = MutableLiveData<List<Card>>()
+    private val _cardList = repository.cards
     private val _filter: MutableLiveData<String> = MutableLiveData("")
 
     val cardList: LiveData<List<Card>>
