@@ -12,24 +12,43 @@ import kotlinx.coroutines.launch
 class CardsViewModel: ViewModel() {
 
     private val _cardList = MutableLiveData<List<Card>>()
+    private val _filter: MutableLiveData<String> = MutableLiveData("")
+
     val cardList: LiveData<List<Card>>
-        get() = _cardList
+        get() {
+            return if(_filter.value == ""){
+                _cardList
+            }
+            else{
+                val cards: List<Card> = _cardList.value?.filter {
+                    it.name.contains(_filter.value ?: "")
+                } ?: listOf()
+                MutableLiveData(cards)
+            }
+        }
+
+    val filter: LiveData<String>
+        get() = _filter
 
     init{
         getCards()
     }
 
+    fun updateFilter(word: String){
+        _filter.value = word
+    }
+
     private fun getCards(){
         viewModelScope.launch {
             try{
-                Log.e("GetCards", "Tentou recuperar")
                 val listResult = HearthStoneApi.retrofitService.getGvGCards()
                 _cardList.value = listResult
-                Log.e("GetCards", "Recuperou: ${listResult.toString()}")
             }catch (e: Exception){
-                _cardList.value = null
-                Log.e("GetCards", "${e.message}")
+                _cardList.value = listOf()
+                Log.i("GetCards", "${e.message}")
             }
         }
     }
+
+
 }

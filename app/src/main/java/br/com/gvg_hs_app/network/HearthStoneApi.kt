@@ -10,10 +10,6 @@ import retrofit2.http.Headers
 
 private const val BASE_URL = "https://omgvamp-hearthstone-v1.p.rapidapi.com"
 
-val okCreator = OkHttpCreator()
-
-val client: OkHttpClient = okCreator.httpClient.build()
-
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -22,13 +18,12 @@ private val moshi = Moshi.Builder()
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
-    .client(client)
     .build()
 
 interface HearthStoneApiService {
     @Headers(
-        "X-RapidAPI-Key: 8a50b37af0mshaac729cca51fe47p12c76ajsnbccbb1fe4915",
-        "X-RapidAPI-Host: omgvamp-hearthstone-v1.p.rapidapi.com"
+        "",
+        ""
     )
     @GET("cards/sets/Goblins%20vs%20Gnomes?collectible=1")
     suspend fun getGvGCards(): List<Card>
