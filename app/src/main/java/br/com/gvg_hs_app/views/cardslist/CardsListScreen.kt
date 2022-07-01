@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -35,7 +36,11 @@ fun CardListScreen(
     val cardList by cardsViewModel.cardList.observeAsState(listOf())
     val filter by cardsViewModel.filter.observeAsState("")
 
-    Column() {
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .background(Color.Black)
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -43,9 +48,9 @@ fun CardListScreen(
             horizontalArrangement = Arrangement.Center
         ){
             Text(
-                text = "GvG HearthStone Cards",
-                style = MaterialTheme.typography.h5.copy(
-                    color = Color(0xFFfce4c5),
+                text = "HearthStone Cards",
+                style = MaterialTheme.typography.h1.copy(
+                    color = Color(0xFFe0b175),
                     fontWeight = FontWeight.Bold
                 )
             )
@@ -68,11 +73,11 @@ fun SearchFilter(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 6.dp, top = 3.dp, start = 3.dp, end = 3.dp),
+            .padding(bottom = 6.dp, top = 3.dp, start = 8.dp, end = 8.dp),
         label = {
                 Row(){
                     Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
-                    Text("Search")
+                    Text("Search", style = MaterialTheme.typography.body1)
                 }
         },
         value = word,
@@ -109,13 +114,14 @@ fun CardItem(
 ){
     androidx.compose.material.Card(
         modifier = Modifier
-            .padding(5.dp)
+            .padding(0.dp)
             .clickable { cardDetail() },
     ) {
         Box(){
             AsyncImage(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .background(Color.Black),
                 alignment = Alignment.Center,
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(card.img)

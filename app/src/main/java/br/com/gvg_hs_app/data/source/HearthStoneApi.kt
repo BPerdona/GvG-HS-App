@@ -20,6 +20,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface HearthStoneApiService {
+
+    //Adicione aqui os Headers
     @Headers(
         "",
         ""

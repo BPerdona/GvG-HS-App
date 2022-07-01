@@ -2,16 +2,34 @@ package br.com.gvg_hs_app.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import br.com.gvg_hs_app.R
+
+val HSFamily = FontFamily(
+    Font(R.font.belwemediumbt, FontWeight.Bold),
+    Font(R.font.belwelightbt, FontWeight.Light),
+    Font(R.font.belwecondensedbt, FontWeight.Normal)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+    h1 = TextStyle(
+        fontFamily = HSFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp
+    ),
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = HSFamily,
+        fontWeight = FontWeight.Light,
+        fontSize = 18.sp
+    ),
+    body2 = TextStyle(
+        fontFamily = HSFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 22.sp
     )
     /* Other default text styles to override
     button = TextStyle(
