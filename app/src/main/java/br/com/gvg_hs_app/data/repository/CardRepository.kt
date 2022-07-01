@@ -2,6 +2,7 @@ package br.com.gvg_hs_app.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
 import br.com.gvg_hs_app.data.domain.Card
 import br.com.gvg_hs_app.data.local.CardDao
 import br.com.gvg_hs_app.data.local.asDomainModel

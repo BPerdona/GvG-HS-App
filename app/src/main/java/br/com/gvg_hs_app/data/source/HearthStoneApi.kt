@@ -21,8 +21,8 @@ private val retrofit = Retrofit.Builder()
 
 interface HearthStoneApiService {
     @Headers(
-        "X-RapidAPI-Key: 8a50b37af0mshaac729cca51fe47p12c76ajsnbccbb1fe4915",
-        "X-RapidAPI-Host: omgvamp-hearthstone-v1.p.rapidapi.com"
+        "",
+        ""
     )
     @GET("cards/sets/Goblins%20vs%20Gnomes?collectible=1")
     suspend fun getGvGCards(): List<SourceCard>

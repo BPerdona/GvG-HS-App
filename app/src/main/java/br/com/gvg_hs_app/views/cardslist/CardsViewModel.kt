@@ -1,4 +1,4 @@
-package br.com.gvg_hs_app.views
+package br.com.gvg_hs_app.views.cardslist
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -47,6 +47,26 @@ class CardsViewModel(private val repository: CardRepository): ViewModel() {
                 Log.e("GetCards", "${ioe.message}")
             }
         }
+    }
+
+    fun getCardById(id: String): Card{
+        _cardList.value?.forEach {
+            if(it.cardId == id){
+                return it
+            }
+        }
+        return Card("-1",
+            "",
+            "",
+            "",
+            0,
+            0,
+            0,
+            "",
+            "",
+            "",
+            "",
+        )
     }
 }
 

@@ -4,17 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import br.com.gvg_hs_app.data.domain.Card
 import br.com.gvg_hs_app.ui.theme.GvGHSAppTheme
-import br.com.gvg_hs_app.views.CardListScreen
-import br.com.gvg_hs_app.views.CardVMFactory
-import br.com.gvg_hs_app.views.CardsViewModel
+import br.com.gvg_hs_app.views.carddetail.CardDetailScreen
+import br.com.gvg_hs_app.views.cardslist.CardListScreen
+import br.com.gvg_hs_app.views.cardslist.CardVMFactory
+import br.com.gvg_hs_app.views.cardslist.CardsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +33,7 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            GvGHSAppTheme {
+            GvGHSAppTheme(darkTheme = true) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -43,5 +49,26 @@ class MainActivity : ComponentActivity() {
 fun GvGHeroes(
     cardsViewModel: CardsViewModel
 ){
-    CardListScreen(cardsViewModel)
+    val navController = rememberNavController()
+    Scaffold() {
+        NavHost(navController = navController, startDestination = "cardList"){
+            composable(route = "cardList"){
+                CardListScreen(
+                    cardsViewModel,
+                    navController
+                )
+            }
+            composable(
+                route = "cardList/{cardId}",
+                arguments = listOf(navArgument("cardId"){
+                    defaultValue = "None"
+                    type = NavType.StringType
+                })
+            ){
+                val cardId = it.arguments?.getString("cardId") ?: "None"
+                val card = cardsViewModel.getCardById(cardId)
+                CardDetailScreen(card)
+            }
+        }
+    }
 }
